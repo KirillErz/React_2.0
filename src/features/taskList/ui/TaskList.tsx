@@ -35,16 +35,7 @@ export function TaskList({ initialTasks }: TaskListProps) {
         <ul className={styles.list}>
           {tasks.map((task) => (
             <li key={task.id} className={styles.item}>
-              <div className={styles.row}>
-                <TaskCard task={task} />
-                <button
-                  type='button'
-                  className={styles.removeButton}
-                  onClick={() => removeTask(task.id)}
-                >
-                  Delete
-                </button>
-              </div>
+              <TaskCard task={task} onRemove={removeTask} />
             </li>
           ))}
         </ul>
