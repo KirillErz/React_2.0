@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
 import type { Task } from 'entities/task/model/types'
 
@@ -31,9 +31,9 @@ export function useTasks(initial: Task[] = defaultTasks): {
     return allTasks
   }, [allTasks, filter])
 
-  const removeTask = (id: string) => {
+  const removeTask = useCallback((id: string) => {
     setAllTasks((prevTasks) => prevTasks.filter((task) => task.id !== id))
-  }
+  }, [])
 
   return {
     tasks,
