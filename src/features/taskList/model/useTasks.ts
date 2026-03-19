@@ -1,23 +1,30 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import type { Task } from 'entities/task/model/types'
+import { useGetTasksQuery } from 'features/taskList/api/tasksApi'
 
 export type Filter = 'all' | 'completed' | 'incomplete'
 
-const defaultTasks: Task[] = [
-  { id: '1', title: 'Write weekly report', completed: false },
-  { id: '2', title: 'Review PR #42', completed: true },
-  { id: '3', title: 'Plan next sprint', completed: false },
-]
-
-export function useTasks(initial: Task[] = defaultTasks): {
+export function useTasks(initial?: Task[]): {
   tasks: Task[]
   filter: Filter
   setFilter: (f: Filter) => void
   removeTask: (id: string) => void
+  isLoading: boolean
+  isError: boolean
 } {
-  const [allTasks, setAllTasks] = useState<Task[]>(initial)
+  const [allTasks, setAllTasks] = useState<Task[]>(() => initial ?? [])
   const [filter, setFilter] = useState<Filter>('all')
+  const { data: loadedTasks = [], isLoading, isError } = useGetTasksQuery()
+
+  useEffect(() => {
+    if (initial?.length) {
+      setAllTasks(initial)
+      return
+    }
+
+    setAllTasks(loadedTasks)
+  }, [initial, loadedTasks])
 
   const tasks = useMemo(() => {
     if (filter === 'completed') {
@@ -40,5 +47,7 @@ export function useTasks(initial: Task[] = defaultTasks): {
     filter,
     setFilter,
     removeTask,
+    isLoading,
+    isError,
   }
 }

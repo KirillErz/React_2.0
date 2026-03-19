@@ -14,7 +14,15 @@ const filterLabels: Record<Filter, string> = {
 }
 
 export function TaskList({ initialTasks }: TaskListProps) {
-  const { tasks, filter, setFilter, removeTask } = useTasks(initialTasks)
+  const { tasks, filter, setFilter, removeTask, isLoading, isError } = useTasks(initialTasks)
+
+  if (isLoading && tasks.length === 0) {
+    return <p className={styles.empty}>Loading tasks...</p>
+  }
+
+  if (isError) {
+    return <p className={styles.empty}>Failed to load tasks.</p>
+  }
 
   return (
     <section>
