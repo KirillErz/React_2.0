@@ -1,0 +1,19 @@
+.page {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  padding: 2rem 1.25rem;
+  background:
+    radial-gradient(circle at 15% 15%, rgba(170, 59, 255, 0.1), transparent 30%),
+    radial-gradient(circle at 85% 20%, rgba(255, 122, 89, 0.12), transparent 34%);
+}
+
+.card {
+  width: min(100%, 520px);
+  box-sizing: border-box;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: color-mix(in srgb, var(--bg) 92%, white 8%);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+}

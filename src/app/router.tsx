@@ -2,6 +2,7 @@ import type { ReactElement } from 'react'
 
 import { HomePage } from 'pages/home/ui/HomePage'
 import { RegisterPage } from 'pages/register/ui/RegisterPage'
+import { SubscribePage } from 'pages/subscribe/ui/SubscribePage'
 import { TaskPage } from 'pages/tasks/ui/TaskPage'
 
 type AppRoute = {
@@ -21,6 +22,10 @@ const routes: AppRoute[] = [
   {
     path: '/register',
     element: <RegisterPage />,
+  },
+  {
+    path: '/subscribe',
+    element: <SubscribePage />,
   },
 ]
 
