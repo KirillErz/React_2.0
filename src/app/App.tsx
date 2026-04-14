@@ -1,4 +1,4 @@
-import { AppRouter } from './router'
+import { AppRouter } from 'features/authRouting/AppRouter'
 
 function App() {
   return <AppRouter />
